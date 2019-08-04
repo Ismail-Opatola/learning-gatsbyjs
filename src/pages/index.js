@@ -3,36 +3,43 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql, StaticQuery } from "gatsby"
 import Post from "../components/Post"
-import { Row, Col } from 'reactstrap'
+import { Row, Col } from "reactstrap"
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
     <h1>Home page</h1>
     <Row>
-      <Col md='8'>
-      <StaticQuery
-      query={indexQuery}
-      render={data => {
-        return (
-          <div>
-            {data.allMarkdownRemark.edges.map(({ node }) => (
-              <Post
-                title={node.frontmatter.title}
-                author={node.frontmatter.author}
-                date={node.frontmatter.date}
-                path={node.frontmatter.path}
-                body={node.frontmatter.excerpt}
-                fluid={node.frontmatter.image.childImageSharp.fluid}
-              />
-            ))}
-          </div>
-        )
-      }}
-    />
+      <Col md="8">
+        <StaticQuery
+          query={indexQuery}
+          render={data => {
+            return (
+              <div>
+                {data.allMarkdownRemark.edges.map(({ node }) => (
+                  <Post
+                    title={node.frontmatter.title}
+                    author={node.frontmatter.author}
+                    date={node.frontmatter.date}
+                    path={node.frontmatter.path}
+                    body={node.frontmatter.excerpt}
+                    fluid={node.frontmatter.image.childImageSharp.fluid}
+                    tags={node.frontmatter.tags}
+                  />
+                ))}
+              </div>
+            )
+          }}
+        />
       </Col>
-      <Col md='4'>
-        <div style={{ width: "100%", height: "100%", background: "rgba(0,0,0,0.3"}}></div>
+      <Col md="4">
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            background: "rgba(0,0,0,0.3",
+          }}
+        ></div>
       </Col>
     </Row>
   </Layout>
@@ -57,6 +64,7 @@ const indexQuery = graphql`
                 }
               }
             }
+            tags
           }
         }
       }
