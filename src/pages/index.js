@@ -3,12 +3,15 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql, StaticQuery } from "gatsby"
 import Post from "../components/Post"
+import { Row, Col } from 'reactstrap'
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
     <h1>Home page</h1>
-    <StaticQuery
+    <Row>
+      <Col md='8'>
+      <StaticQuery
       query={indexQuery}
       render={data => {
         return (
@@ -20,18 +23,24 @@ const IndexPage = () => (
                 date={node.frontmatter.date}
                 path={node.frontmatter.path}
                 body={node.frontmatter.excerpt}
+                fluid={node.frontmatter.image.childImageSharp.fluid}
               />
             ))}
           </div>
         )
       }}
     />
+      </Col>
+      <Col md='4'>
+        <div style={{ width: "100%", height: "100%", background: "rgba(0,0,0,0.3"}}></div>
+      </Col>
+    </Row>
   </Layout>
 )
 
 const indexQuery = graphql`
   query {
-    allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}) {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
           id
@@ -41,6 +50,13 @@ const indexQuery = graphql`
             date(formatString: "MMM Do YYYY")
             author
             path
+            image {
+              childImageSharp {
+                fluid(maxWidth: 600) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
         }
       }
