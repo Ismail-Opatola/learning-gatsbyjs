@@ -4,9 +4,9 @@ import Img from "gatsby-image"
 import { Card, CardBody, CardTitle, CardSubtitle, CardText , Badge} from "reactstrap"
 import { slugify } from "../util/utilityFunctions"
 
-const Post = ({ title, author, date, path, body, fluid, tags, id }) => {
+const Post = ({ title, author, date, path, body, fluid, tags}) => {
   return (
-    <Card key={id}>
+    <Card >
       <Link to={path}>
         <Img className="card-image-top" fluid={fluid} />
       </Link>

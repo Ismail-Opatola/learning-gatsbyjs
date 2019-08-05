@@ -26,7 +26,7 @@ const IndexPage = () => (
                     body={node.frontmatter.excerpt}
                     fluid={node.frontmatter.image.childImageSharp.fluid}
                     tags={node.frontmatter.tags}
-                    id={node.id}
+                    key={node.id}
                   />
                 ))}
               </div>
