@@ -4,6 +4,7 @@ import SEO from "../components/seo"
 import { graphql, StaticQuery } from "gatsby"
 import Post from "../components/Post"
 import { Row, Col } from "reactstrap"
+import SideBar from "../components/SideBar.js"
 
 const IndexPage = () => (
   <Layout>
@@ -25,6 +26,7 @@ const IndexPage = () => (
                     body={node.frontmatter.excerpt}
                     fluid={node.frontmatter.image.childImageSharp.fluid}
                     tags={node.frontmatter.tags}
+                    id={node.id}
                   />
                 ))}
               </div>
@@ -33,13 +35,7 @@ const IndexPage = () => (
         />
       </Col>
       <Col md="4">
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            background: "rgba(0,0,0,0.3",
-          }}
-        ></div>
+        <SideBar />
       </Col>
     </Row>
   </Layout>
